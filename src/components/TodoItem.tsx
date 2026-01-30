@@ -24,6 +24,8 @@ export const TodoItem: React.FC<Props> = ({ item, onToggle }) => {
             <Text style={styles.description}>{item.description}</Text>
         )}
       </View>
+
+      
     </View>
   );
 };

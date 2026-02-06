@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet, Text, } from 'react-native';
+import { View, FlatList, StyleSheet, Text,Alert } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { STATIC_TODOS } from '../data/mockData';
 import { TodoItem } from '../components/TodoItem';
@@ -19,7 +19,23 @@ export default function HomeScreen() {
     });
     setTodos(newTodos); 
   };
-
+  const handleDeleteTodo = (id: string) => {
+    Alert.alert('Xóa Todo', 'Bạn có chắc chắn muốn xóa todo này không?', [
+      {
+        text: 'Hủy',
+        style: 'cancel',
+      },
+      {
+        text: 'Xóa',
+        style: 'destructive',
+        onPress: () => {
+          const newTodos = todos.filter(item => item.id !== id);
+          setTodos(newTodos);
+        },
+      },
+    ]);
+  }
+ 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -33,6 +49,7 @@ export default function HomeScreen() {
           <TodoItem 
             item={item} 
             onToggle={handleToggleTodo} 
+            onDelete={handleDeleteTodo}
           />
         )}
         contentContainerStyle={styles.listContent}
@@ -51,44 +68,14 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
+  container: { flex: 1, backgroundColor: '#F5F5F5' },
   fab: {
-  position: 'absolute',
-  right: 20,
-  bottom: 30,
-  width: 56,
-  height: 56,
-  borderRadius: 28,
-  backgroundColor: '#007AFF',
-  justifyContent: 'center',
-  alignItems: 'center',
-  elevation: 5,
-},
-fabText: {
-  color: '#fff',
-  fontSize: 32,
-  lineHeight: 34,
-},
-
-  header: {
-    padding: 20,
-    backgroundColor: '#FFF',
-    marginBottom: 10,
+    position: 'absolute', right: 20, bottom: 30, width: 56, height: 56,
+    borderRadius: 28, backgroundColor: '#253342', justifyContent: 'center',
+    alignItems: 'center', elevation: 5,
   },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  subTitle: {
-    fontSize: 16,
-    color: 'blue',
-    marginTop: 5,
-  },
-  listContent: {
-    paddingBottom: 20,
-  },
+fabText: { color: '#ffffff', fontSize: 32, lineHeight: 34 },
+  header: { padding: 20, backgroundColor: '#007AFF', marginBottom: 10 },
+  headerTitle: { fontSize: 24, fontWeight: 'bold', color: '#ffffff' }, // Đổi màu chữ trắng cho dễ nhìn
+  listContent: { paddingBottom: 20 },
 });

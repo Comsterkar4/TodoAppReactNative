@@ -7,7 +7,6 @@ export default function CreateTodoScreen() {
   const [title, setTitle] = useState('');
 
   const handleSave = () => {
-    // sau này thêm todo ở đây
     navigation.goBack();
   };
 

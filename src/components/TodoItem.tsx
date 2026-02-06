@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   done: {
     color: 'blue',
-    textDecorationLine: 'line-through', // Gạch ngang chữ
+    textDecorationLine: 'line-through',
     opacity: 0.6
   },
   notDone: {

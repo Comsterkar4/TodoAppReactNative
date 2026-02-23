@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', elevation: 5,
   },
 fabText: { color: '#ffffff', fontSize: 32, lineHeight: 34 },
-  header: { padding: 20, backgroundColor: '#007AFF', marginBottom: 10 },
-  headerTitle: { fontSize: 24, fontWeight: 'bold', color: '#ffffff' }, // Đổi màu chữ trắng cho dễ nhìn
+  header: { padding: 20, backgroundColor: '#4b7bad', marginBottom: 10 },
+  headerTitle: { fontSize: 24, fontWeight: 'bold', color: '#ffffff' }, 
   listContent: { paddingBottom: 20 },
 });

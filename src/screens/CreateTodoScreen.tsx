@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function CreateTodoScreen() {
   const navigation = useNavigation<any>();
   const [title, setTitle] = useState('');
-
+  const [description, setDescription] = useState('');
   const handleSave = () => {
+    ToastAndroid.show("Them Thanh Cong!", ToastAndroid.SHORT);
     navigation.goBack();
   };
 
@@ -18,6 +19,12 @@ export default function CreateTodoScreen() {
         onChangeText={setTitle}
         style={styles.input}
       />
+      <TextInput
+    placeholder="Ghi chú"
+    value={description}
+    onChangeText={setDescription}
+    style={styles.note}
+  />
       <Button title="Lưu" onPress={handleSave} />
     </View>
   );
@@ -33,5 +40,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     marginBottom: 20,
+  },
+  note: {
+  borderWidth: 1,
+  borderColor: '#ccc',
+  borderRadius: 8,
+  padding: 12,
+  marginBottom: 20,
+  minHeight: 120,
+  textAlignVertical: 'top',
   },
 });

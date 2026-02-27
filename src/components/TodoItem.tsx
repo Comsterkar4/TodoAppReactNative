@@ -11,26 +11,30 @@ interface Props {
 export const TodoItem: React.FC<Props> = ({ item, onToggle, onDelete }) => {
   return (
     <View style={styles.itemTodo}>
-  
-      <TouchableOpacity onPress={() => onToggle(item.id)}>
-        <Text style={styles.icon}>
-          {item.isCompleted ? '✅' : '⬜'}
-        </Text>
+
+      <TouchableOpacity
+        style={[
+          styles.circle,
+          item.isCompleted && styles.circleCompleted
+        ]}
+        onPress={() => onToggle(item.id)}
+      >
+        {item.isCompleted && <View style={styles.innerCircle} />}
       </TouchableOpacity>
 
-    
+
       <View style={styles.contentContainer}>
         <Text style={[styles.title, item.isCompleted ? styles.done : styles.notDone]}>
           {item.title}
         </Text>
         {item.description && (
-            <Text style={styles.description}>{item.description}</Text>
+          <Text style={styles.description}>{item.description}</Text>
         )}
       </View>
 
-      
-      <TouchableOpacity 
-        style={styles.deleteButton} 
+
+      <TouchableOpacity
+        style={styles.deleteButton}
         onPress={() => onDelete(item.id)}
       >
         <Text style={styles.deleteText}>Xóa</Text>
@@ -55,15 +59,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     shadowOffset: { width: 0, height: 1 },
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   icon: {
     fontSize: 20,
     marginRight: 10,
-  
+
   },
   contentContainer: {
-    flex: 1, 
+    flex: 1,
   },
   title: {
     fontSize: 16,
@@ -89,11 +93,32 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 10,
     borderRadius: 4,
-    marginLeft: 10, 
+    marginLeft: 10,
   },
   deleteText: {
     color: 'red',
     fontSize: 12,
     fontWeight: 'bold',
-  }
+  },
+  circle: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#007bff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  },
+
+  circleCompleted: {
+    borderColor: '#007bff',
+  },
+
+  innerCircle: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: '#007bff',
+  },
 });

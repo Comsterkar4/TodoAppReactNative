@@ -10,16 +10,15 @@ const Stack = createNativeStackNavigator();
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Todo App' }}
         />
         <Stack.Screen
           name="CreateTodo"
           component={CreateTodoScreen}
-          options={{ title: 'Tạo Todo' }}
+          options={{ headerShown: true, title: 'Tạo Todo' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

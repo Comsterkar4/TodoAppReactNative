@@ -5,11 +5,17 @@ import { STATIC_TODOS } from '../data/mockData';
 import { TodoItem } from '../components/TodoItem';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useMemo } from 'react';
 
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [todos, setTodos] = useState(STATIC_TODOS);
   const [search, setSearch] = useState('');
+  const filteredTodos = useMemo(() => {
+    return todos.filter(item =>
+      item.title.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [todos, search]);
   const handleToggleTodo = (id: string) => {
     const newTodos = todos.map(item => {
       if (item.id === id) {
@@ -48,7 +54,7 @@ export default function HomeScreen() {
       </View>
 
       <FlatList
-        data={todos}
+        data={filteredTodos}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TodoItem
@@ -73,9 +79,9 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     flex: 1,
-    backgroundColor: '#F5F5F5' 
+    backgroundColor: '#F5F5F5'
   },
   fab: {
     position: 'absolute', right: 20, bottom: 30, width: 56, height: 56,
@@ -85,14 +91,14 @@ const styles = StyleSheet.create({
   fabText: { color: '#ffffff', fontSize: 22, lineHeight: 24 },
   header: { padding: 20, backgroundColor: '#4b7bad', marginBottom: 10 },
   headerTitle: { fontSize: 16, fontWeight: 'bold', color: '#ffffff' },
-  listContent: { 
-    paddingBottom: 100, 
+  listContent: {
+    paddingBottom: 100,
   },
   searchInput: {
     backgroundColor: '#ffffff',
     borderRadius: 8,
     width: '100%',
-    paddingHorizontal: 10, 
+    paddingHorizontal: 10,
     marginBottom: 10,
   }
 });
